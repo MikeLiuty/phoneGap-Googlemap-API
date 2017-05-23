@@ -1,1 +1,1 @@
-# phoneGap-Googlemap-API
+# phonegap-smalldemo

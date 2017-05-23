@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 1500px;
+        width: 100%;
+       }
+
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var bounds = new google.maps.LatLngBounds();
+
+        var PuketePa = { lat: -37.737051, lng: 175.237474 };
+        var KirikiriroaPA = { lat: -37.782704, lng: 175.28051 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: { lat: -37.7598775, lng: 175.258992 }
+        });
+
+        infoWindow = new google.maps.InfoWindow;
+        var marker = new google.maps.Marker({
+            position: PuketePa,
+            map: map
+        });
+        var marker = new google.maps.Marker({
+            position: KirikiriroaPA,
+            map: map
+        });
+      }
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWuQPGMVNAOhkcGPZd7X9ZpS-0b17_PVA&callback=initMap">
+    </script>
+
+   <a href="index.html"> <h2 style=" font size: initial;">back</h2></a>
+  </body>
+</html>
